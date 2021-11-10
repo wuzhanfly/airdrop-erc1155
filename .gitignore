@@ -10,7 +10,7 @@ deployments/ganache
 #Hardhat files
 cache
 artifacts
-
+config.ts
 .env
 typechain
 
