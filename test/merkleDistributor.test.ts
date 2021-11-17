@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 import { BigNumber, Contract, Signer } from "ethers";
-import { MerkleDistributor } from "../typechain";
-import { FiatERC1155 } from "../typechain";
+import { MerkleDistributor } from "../typechain/MerkleDistributor";
+import { FiatERC1155 } from "../typechain/FiatERC1155";
 import { expect } from "chai";
 import BalanceTree from "../src/balance-tree";
 import airdrop_unit_test from "../scripts/airdrop-unit-test.json";
