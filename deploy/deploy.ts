@@ -13,25 +13,21 @@ const calculateTotalAirdrop = (accounts: any) => {
 	);
 };
 
-
-async function deploy_test(reward_token: string, emergency_receiver: string, sbonus_start: string, sweeks_bonus_duration: string, sweeks_emergency: string) {
+async function deploy_test(erc_1155_token: string, token_id: string, emergency_receiver: string, sweeks_emergency: string) {
 	await hardhat.run('compile');
+	const now = Math.floor(Date.now() / 1000);
 
-	const bonus_start = Number.parseInt(sbonus_start);
-	const weeks_bonus_duration = Number.parseInt(sweeks_bonus_duration);
 	const weeks_emergency = Number.parseInt(sweeks_emergency);
 
-	const bonus_end = bonus_start + (60 * 60 * 24 * 7 * weeks_bonus_duration);
-	const emergency_starts = bonus_end + (60 * 60 * 24 * 7 * weeks_emergency);
+	const emergency_starts = now + (60 * 60 * 24 * 7 * weeks_emergency);
 
 	const airdropAccounts = airdrop_test.map((drop) => ({
 		account: drop.address,
-		amount: ethers.utils.parseEther(drop.earnings.toString())
+		amount: BigNumber.from(drop.earnings.toString())
 	}));
 
 	const tree = new BalanceTree(airdropAccounts);
 	const root = tree.getHexRoot();
-	const totalAllocatedAirdrop = calculateTotalAirdrop(airdropAccounts);
 
 	console.log("###############################################");
 	console.log(`merkle tree root: ${root}`);
@@ -39,12 +35,9 @@ async function deploy_test(reward_token: string, emergency_receiver: string, sbo
 
 	const MerkleDistributor = await ethers.getContractFactory('MerkleDistributor');
 	const merkleInstance = await MerkleDistributor.deploy(
-		reward_token,
+		erc_1155_token,
+		token_id,
 		root,
-		airdropAccounts.length,
-		totalAllocatedAirdrop,
-		bonus_start,
-		bonus_end,
 		emergency_starts,
 		emergency_receiver
 	);
@@ -59,31 +52,28 @@ async function deploy_test(reward_token: string, emergency_receiver: string, sbo
 	console.log('Verifying contract on Etherscan...');
 	await hardhat.run("verify:verify", {
 		address: merkleInstance.address,
-		constructorArguments: [reward_token, root, airdropAccounts.length, totalAllocatedAirdrop, bonus_start, bonus_end, emergency_starts, emergency_receiver],
+		constructorArguments: [erc_1155_token, token_id, root, emergency_starts, emergency_receiver],
 		contract: "contracts/MerkleDistributor.sol:MerkleDistributor",
 	});
 
 	console.log('MerkleDistributor Address: ', merkleInstance.address);
 }
 
-async function deploy(reward_token: string, emergency_receiver: string, sbonus_start: string, sweeks_bonus_duration: string, sweeks_emergency: string) {
+async function deploy(erc_1155_token: string, token_id: string, emergency_receiver: string, sweeks_emergency: string) {
 	await hardhat.run('compile');
+	const now = Math.floor(Date.now() / 1000);
 
-	const bonus_start = Number.parseInt(sbonus_start);
-	const weeks_bonus_duration = Number.parseInt(sweeks_bonus_duration);
 	const weeks_emergency = Number.parseInt(sweeks_emergency);
 
-	const bonus_end = bonus_start + (60 * 60 * 24 * 7 * weeks_bonus_duration);
-	const emergency_starts = bonus_end + (60 * 60 * 24 * 7 * weeks_emergency);
+	const emergency_starts = now + (60 * 60 * 24 * 7 * weeks_emergency);
 
 	const airdropAccounts = airdrop.map((drop) => ({
 		account: drop.address,
-		amount: ethers.utils.parseEther(drop.earnings.toString())
+		amount: BigNumber.from(drop.earnings.toString())
 	}));
 
 	const tree = new BalanceTree(airdropAccounts);
 	const root = tree.getHexRoot();
-	const totalAllocatedAirdrop = calculateTotalAirdrop(airdropAccounts);
 
 	console.log("###############################################");
 	console.log(`merkle tree root: ${root}`);
@@ -91,12 +81,9 @@ async function deploy(reward_token: string, emergency_receiver: string, sbonus_s
 
 	const MerkleDistributor = await ethers.getContractFactory('MerkleDistributor');
 	const merkleInstance = await MerkleDistributor.deploy(
-		reward_token,
+		erc_1155_token,
+		token_id,
 		root,
-		airdropAccounts.length,
-		totalAllocatedAirdrop,
-		bonus_start,
-		bonus_end,
 		emergency_starts,
 		emergency_receiver
 	);
@@ -111,7 +98,7 @@ async function deploy(reward_token: string, emergency_receiver: string, sbonus_s
 	console.log('Verifying contract on Etherscan...');
 	await hardhat.run("verify:verify", {
 		address: merkleInstance.address,
-		constructorArguments: [reward_token, root, airdropAccounts.length, totalAllocatedAirdrop, bonus_start, bonus_end, emergency_starts, emergency_receiver],
+		constructorArguments: [erc_1155_token, token_id, root, emergency_starts, emergency_receiver],
 		contract: "contracts/MerkleDistributor.sol:MerkleDistributor",
 	});
 

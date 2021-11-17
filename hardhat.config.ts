@@ -13,33 +13,29 @@ import "@typechain/hardhat";
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 task('deploy-airdrop', 'Generate the merkle root and deploy')
-	.addParam('rewardtoken', 'The address of the reward token')
-	.addParam('emergencyreceiver', 'The address of the emergency receiver')
-	.addParam('bonusstart', 'timestamp for bonus start')
-	.addParam('weeksbonusduration', 'number of weeks for the bonus to run')
+	.addParam('erc1155token', 'The address of the ERC1155 Token')
+	.addParam('tokenid', 'The of the ERC1155 Token')
+	.addParam('emergencyreceiver', 'The address to receive unclaimed rewards after emergency withdraw')
 	.addParam('weeksemergency', 'number of weeks after the bonus ends for the emergency to be enabled')
 	.setAction(async (taskArg) => {
 		const {deploy} = require('./deploy/deploy');
 		await deploy(
-			taskArg.rewardtoken,
+			taskArg.erc1155token,
+			taskArg.tokenid,
 			taskArg.emergencyreceiver,
-			taskArg.bonusstart,
-			taskArg.weeksbonusduration,
 			taskArg.weeksemergency);
 	});
 task('deploy-airdrop-test', 'Generate the merkle root and deploy')
-	.addParam('rewardtoken', 'The address of the reward token')
-	.addParam('emergencyreceiver', 'The address of the emergency receiver')
-	.addParam('bonusstart', 'timestamp for bonus start')
-	.addParam('weeksbonusduration', 'number of weeks for the bonus to run')
+	.addParam('erc1155token', 'The address of the ERC1155 Token')
+	.addParam('tokenid', 'The of the ERC1155 Token')
+	.addParam('emergencyreceiver', 'The address to receive unclaimed rewards after emergency withdraw')
 	.addParam('weeksemergency', 'number of weeks after the bonus ends for the emergency to be enabled')
 	.setAction(async (taskArg) => {
 		const {deploy_test} = require('./deploy/deploy');
 		await deploy_test(
-			taskArg.rewardtoken,
+			taskArg.erc1155token,
+			taskArg.tokenid,
 			taskArg.emergencyreceiver,
-			taskArg.bonusstart,
-			taskArg.weeksbonusduration,
 			taskArg.weeksemergency);
 	});
 
