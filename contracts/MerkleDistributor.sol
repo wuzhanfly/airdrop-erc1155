@@ -67,7 +67,7 @@ contract MerkleDistributor is IMerkleDistributor, ERC1155Holder {
     // Mark it claimed and send the token.
     _setClaimed(index);
 
-		IERC1155(erc1155Token).safeTransferFrom(address(this), account, tokenId, amount, "0x0");
+		IERC1155(erc1155Token).safeTransferFrom(address(this), account, tokenId, amount, new bytes(0));
 
     emit Claimed(index, account, amount);
   }
@@ -80,7 +80,7 @@ contract MerkleDistributor is IMerkleDistributor, ERC1155Holder {
 			emergencyReceiver,
 			tokenId,
 			IERC1155(erc1155Token).balanceOf(address(this), tokenId),
-			"0x0"
+			new bytes(0)
 		);
   }
 }
