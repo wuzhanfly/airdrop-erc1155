@@ -15,9 +15,8 @@ contract MerkleDistributor is IMerkleDistributor, ERC1155Holder {
   // This is a packed array of booleans.
   mapping(uint256 => uint256) private claimedBitMap;
 
-  uint256 public claimed;
-  uint256 public emergencyTimeout;
-  address public emergencyReceiver;
+  uint256 public immutable emergencyTimeout;
+  address public immutable emergencyReceiver;
 
   constructor(
     address erc1155Token_,
@@ -31,7 +30,7 @@ contract MerkleDistributor is IMerkleDistributor, ERC1155Holder {
     merkleRoot = merkleRoot_;
     emergencyTimeout = _emergencyTimeout;
     emergencyReceiver = _emergencyReceiver;
-    require(emergencyTimeout > block.timestamp, "WRONG_EMERGENCY_TIMEOUT");
+    require(_emergencyTimeout > block.timestamp, "WRONG_EMERGENCY_TIMEOUT");
   }
 
   function isClaimed(uint256 index) public view override returns (bool) {
