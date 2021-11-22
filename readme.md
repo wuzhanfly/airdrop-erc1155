@@ -31,6 +31,7 @@ npx hardhat --network rinkeby deploy-airdrop --erc1155token "" --tokenid "" --em
 ### Addresses
 
 [MerkleDistributor Amphora](https://etherscan.io/address/0x3658D9be7eADadD55aCCBc31a6fD232aEC1719Ed#code)
+
 `Amphora Merkle root hash: 0x802133371213b3157410bbda5c614b24be5130233817b77507f11664f32c2773`
 
 ### Distribution File
