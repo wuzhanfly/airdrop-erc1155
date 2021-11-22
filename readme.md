@@ -24,6 +24,10 @@ npx hardhat --network rinkeby deploy-airdrop-test --erc1155token "" --tokenid ""
 npx hardhat --network rinkeby deploy-airdrop --erc1155token "" --tokenid "" --emergencyreceiver "" --weeksemergency ""
 ```
 
+# Airdrop lists
+
+The lists of entitled wallets in the Age of Romulus NFT airdrops are located in the `data` folder. The lists are created using this [python script](https://colab.research.google.com/drive/13woncFVJ7KR29bLidRPMU-30QMp8v2GJ?usp=sharing). Note that the script will be updated going forward reflecting the logic of the various airdrops.
+
 # Active Contracts
 
 ## Mainnet Contracts
