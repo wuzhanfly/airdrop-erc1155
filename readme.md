@@ -40,12 +40,16 @@ The lists of entitled wallets in the Age of Romulus NFT airdrop program can be f
 
 ### Addresses
 
-[MerkleDistributor Amphora](https://etherscan.io/address/0x3658D9be7eADadD55aCCBc31a6fD232aEC1719Ed#code)
+[MerkleDistributor Amphora](https://etherscan.io/address/0x3658D9be7eADadD55aCCBc31a6fD232aEC1719Ed#code) - `0x3658D9be7eADadD55aCCBc31a6fD232aEC1719Ed`
+
+[MerkleDistributor Kithara](https://etherscan.io/address/0xe6052737E294E2C0c2D2f1160614eDD0b37f34A8#code) - `0xe6052737E294E2C0c2D2f1160614eDD0b37f34A8`
 
 `Amphora Merkle root hash: 0x802133371213b3157410bbda5c614b24be5130233817b77507f11664f32c2773`
 
+`Kithara Merkle root hash: 0x93969ff1e8581377b49ff1578b7f1b1f44bcec01568f0e5928605dc04cd022b9`
+
 ### Distribution File
-**Note:** The file used in the deployment and root generation is [here](./scripts/airdrop.json).
+**Note:** The file used in the last deployment and root generation is [here](./scripts/airdrop.json). For the files from previous deployments, see the [data folder](https://github.com/fiatdao/airdrop-erc1155/blob/main/data).
 
 ## Rinkeby Contracts
 
